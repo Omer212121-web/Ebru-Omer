@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ebru & Ömer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum-deep:#1c1420;
+    --plum:#2c1e2f;
+    --wine:#4a2436;
+    --sienna:#b0542c;
+    --amber:#d9a756;
+    --dusty-rose:#c98a9c;
+    --cream:#f3e8dd;
+    --cream-dim:#c9bdb2;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html, body{
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+    width:100%;
+  }
+  body{
+    font-family:'Jost', sans-serif;
+    background:var(--plum-deep);
+    color:var(--cream);
+  }
+  ::selection{background:var(--sienna); color:var(--cream);}
+
+  #hero{
+    position:relative;
+    height:100vh;
+    min-height:600px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--plum-deep) 0%, var(--wine) 55%, var(--sienna) 100%);
+    padding: 0 1rem;
+  }
+  #sun{
+    position:absolute;
+    width:120px; height:120px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--amber), var(--sienna) 75%);
+    top:18%; left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 60px 10px rgba(217,167,86,0.35);
+    animation:sunFade 4s ease-in-out infinite alternate;
+    will-change: top, opacity;
+  }
+  @keyframes sunFade{ from{opacity:.85;} to{opacity:1;} }
+  #hillline{
+    position:absolute;
+    bottom:0; left:0; width:100%; height:35%;
+    background:var(--plum-deep);
+    clip-path: polygon(0% 60%, 12% 45%, 28% 58%, 45% 38%, 60% 55%, 78% 42%, 100% 58%, 100% 100%, 0% 100%);
+  }
+  .eyebrow{
+    letter-spacing:.35em;
+    font-size:12px;
+    text-transform:uppercase;
+    color:var(--dusty-rose);
+    z-index:2;
+    margin-bottom:1.2rem;
+  }
+  h1.names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(2.8rem, 8vw, 6rem);
+    z-index:2;
+    line-height:1.05;
+    color:var(--cream);
+  }
+  h1.names em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--amber);
+    font-size:0.55em;
+    display:block;
+    margin-top:.3rem;
+    letter-spacing:.05em;
+  }
+  .scrolldown{
+    position:absolute;
+    bottom:34px;
+    font-size:11px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--cream-dim);
+    z-index:2;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
+  section{
+    max-width:760px;
+    margin:0 auto;
+    padding:6rem 1.5rem;
+    word-break: break-word;
+  }
+  .section-label{
+    font-size:12px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--amber);
+    text-align:center;
+    margin-bottom:1rem;
+  }
+  h2.section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(2rem, 4.5vw, 2.8rem);
+    text-align:center;
+    margin-bottom:3rem;
+    color:var(--cream);
+  }
+
+  #letter{
+    background:linear-gradient(180deg, var(--plum-deep), var(--plum));
+  }
+  .letter-box{
+    border:1px solid rgba(217,167,86,0.25);
+    border-radius:4px;
+    padding:3rem 2.5rem;
+    background:rgba(255,255,255,0.02);
+  }
+  .letter-box p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.35rem;
+    line-height:1.9;
+    color:var(--cream-dim);
+    margin-bottom:1.4rem;
+  }
+  .letter-box p:first-of-type::first-letter{
+    font-size:3.2rem;
+    float:left;
+    line-height:0.8;
+    padding-right:10px;
+    padding-top:6px;
+    color:var(--amber);
+  }
+  .signature{
+    text-align:right;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--amber);
+    margin-top:1.5rem;
+  }
+
+  #memories{ background:var(--plum); }
+  .memory{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:1.8rem;
+    align-items:center;
+    padding:2rem 0;
+    border-bottom:1px solid rgba(217,167,86,0.15);
+  }
+  .memory:last-child{ border-bottom:none; }
+  .memory-photo{
+    width:140px; height:140px;
+    max-width: 100%;
+    border-radius:6px;
+    object-fit:cover;
+    border:1px solid rgba(217,167,86,0.3);
+    background:rgba(255,255,255,0.04);
+  }
+  .memory-date{
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:.5rem;
+  }
+  .memory-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem;
+    margin-bottom:.5rem;
+    color:var(--cream);
+  }
+  .memory-text{
+    font-size:.95rem;
+    line-height:1.7;
+    color:var(--cream-dim);
+    font-weight:300;
+  }
+
+  #closing{
+    background:linear-gradient(180deg, var(--plum), var(--wine) 60%, var(--plum-deep));
+    text-align:center;
+    padding-bottom: 8rem;
+  }
+  #closing p.big{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.6rem, 4vw, 2.3rem);
+    color:var(--cream);
+    max-width:600px;
+    margin:0 auto 1.5rem;
+    line-height:1.6;
+  }
+  .names-final{
+    font-size:12px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--dusty-rose);
+    margin-top:2rem;
+  }
+
+  #player{
+    position:fixed;
+    bottom:20px; 
+    right:20px;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(28,20,32,0.92);
+    border:1px solid rgba(217,167,86,0.4);
+    border-radius:40px;
+    padding:8px 16px 8px 8px;
+    backdrop-filter:blur(8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    max-width: calc(100vw - 40px);
+  }
+  #player button{
+    width:38px; height:38px;
+    flex-shrink: 0;
+    border-radius:50%;
+    border:none;
+    background:var(--amber);
+    color:var(--plum-deep);
+    font-size:14px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: transform 0.2s;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+  #player span{
+    font-size:11px;
+    letter-spacing:.1em;
+    color:var(--cream-dim);
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media(max-width:560px){
+    .memory{ grid-template-columns:1fr; }
+    .memory-photo{
+       width:100%;
+       height:260px;
+       margin:0 auto;
+       object-position:center;
+     }
+    .letter-box { padding: 2rem 1.2rem; }
+    #player {
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <div class="eyebrow">bir akşamüstü hikayesi</div>
+  <h1 class="names">Ebru <em>&</em> Ömer</h1>
+  <div id="sun"></div>
+  <div id="hillline"></div>
+  <div class="scrolldown">aşağı kaydır</div>
+</section>
+
+<section id="letter">
+  <div class="section-label">Özür Dilerim Herşey İçin</div>
+  <h2 class="section-title">Sana yazdıklarım</h2>
+  <div class="letter-box">
+    <p>Bunu buraya yazarken elim titriyor. Söylemem gerekenleri yapmam gerekenleri zamanında yapmadım, Ama şunu bilmeni istiyorum: seni incitmek hiç istemedim.</p>
+    <p>Şu an aramızda olan şey ne olursa olsun, Sen benim gözümde halen Hackathonda gördüğüm içimin cız ettiği biricik sevdiğimsin.</p>
+    <p>Şuan belki geç kaldım, belki de hâlâ vakit var. Bilmiyorum. Ama bunu sana anlatmak, elimden gelen herşeyi yapacağım birtanem.</p>
+    <div class="signature">— Sevdiğin</div>
+  </div>
+</section>
+
+<section id="memories">
+  <div class="section-label">EBRU&ÖMER HİKAYESİ</div>
+  <h2 class="section-title">Anılarımız</h2>
+
+  <div class="memory">
+    <img src="./fotograf1.jpg" alt="Tanışmamız" class="memory-photo" onerror="this.style.display='none'; this.nextElementSibling.insertAdjacentHTML('afterbegin','<div style=&quot;color:#d9a756;font-size:.9rem;margin-bottom:.5rem&quot;>Beraber Uçhisar Kalesine Çıktığımız bir an...</div>');">
+    <div class="memory-content">
+      <div class="memory-date"> Sen Nevşehir'i Seyret Yâr Bende Seni </div>
+      <div class="memory-title"> Uçhisar Kalesi </div>
+      <div class="memory-text">Hayatımda asla unutamayacağım beraber olduğumuz bir an o zamanda gene birşeylere tartışmıştık ama her zaman olduğu gibi biz olup onu da atlattık.</div>
+    </div>
+  </div>
+
+  <div class="memory">
+    <img src="./fotograf2.jpg" alt="Doğum Günü Anısı" class="memory-photo" onerror="this.style.display='none'; this.nextElementSibling.insertAdjacentHTML('afterbegin','<div style=&quot;color:#d9a756;font-size:.9rem;margin-bottom:.5rem&quot;>fotograf2.jpg bulunamadı</div>');">
+    <div class="memory-content">
+      <div class="memory-date">Doğum Günün</div>
+      <div class="memory-title">İyi ki Doğdun Sevdiceğim</div>
+      <div class="memory-text">25 Kasım Bebeğimin Doğduğu Dünya'ya Gözlerini Açtığı gün.</div>
+    </div>
+  </div>
+
+  <div class="memory">
+    <img src="./fotograf3.jpg" alt="Güneşli Gün" class="memory-photo" onerror="this.style.display='none'; this.nextElementSibling.insertAdjacentHTML('afterbegin','<div style=&quot;color:#d9a756;font-size:.9rem;margin-bottom:.5rem&quot;>fotograf3.jpg bulunamadı</div>');">
+    <div class="memory-content">
+      <div class="memory-date">Avanos Irmak Yakını Bizim Pinterest Kahvaltısı</div>
+      <div class="memory-title">Sıcak Bir Sarılış</div>
+      <div class="memory-text">Ağaçların altında,Beraber huzur dolu geçirdiğimiz o güzel gün...</div>
+    </div>
+  </div>
+</section>
+
+<section id="closing">
+  <p class="big">"Seni bulup buralardan kaçarım bi' akşamüstü..."</p>
+  <p class="big" style="font-size:1.1rem; opacity:.85;">Bugünleride atlatıp yarınlarımızda birbirimize sımsıkı sarılacağız Sevdiğim. Seni Kırdığım için Özür Diliyorum SENİ SEVİYORUM...</p>
+  <div class="names-final">Ebru & Ömer</div>
+</section>
+
+<div id="player">
+  <button id="playBtn" aria-label="Müziği Başlat">▶</button>
+  <span id="songLabel">Yalın — Akşamüstü</span>
+</div>
+
+<audio id="myAudio" preload="auto" loop>
+  <source src="sarki.mp3" type="audio/mpeg">
+  <source src="sarki.ogg" type="audio/ogg">
+</audio>
+
+<script>
+  var sun = document.getElementById('sun');
+  var hero = document.getElementById('hero');
+  window.addEventListener('scroll', function(){
+    var progress = Math.min(window.scrollY / (hero.offsetHeight), 1);
+    sun.style.top = (18 + progress * 45) + '%';
+    sun.style.opacity = 1 - progress * 0.6;
+  });
+
+  var audio = document.getElementById('myAudio');
+  var btn = document.getElementById('playBtn');
+
+  btn.addEventListener('click', function(){
+    if (audio.paused) {
+      var playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(function() {
+          btn.textContent = '❚❚';
+        }).catch(function(error) {
+          alert("Müzik dosyası yüklenemedi. Lütfen 'sarki.mp3' dosyasının index.html ile aynı klasörde olduğundan ve isminin birebir aynı yazıldığından emin ol.");
+          console.error(error);
+        });
+      }
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+    }
+  });
+</script>
+
+</body>
+</html>
